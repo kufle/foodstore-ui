@@ -6,7 +6,7 @@ export async function registerUser(data){
 }
 
 export async function login(email, password){
-    return await axios.post(`${config.api_host}/auth/register`, {email, password});
+    return await axios.post(`${config.api_host}/auth/login`, {email, password});
 }
 
 export async function logout(){

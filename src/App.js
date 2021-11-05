@@ -6,6 +6,8 @@ import 'upkit/dist/style.min.css';
 import { listen } from './app/listener';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import RegisterSuccess from './pages/Register/RegisterSuccess';
+import Login from './pages/Login';
 
 function App() {
 	
@@ -19,6 +21,10 @@ function App() {
 				<Router>
 					<Switch>
 						<Route path="/register" component={Register} />
+						<Route path="/register-success" component={RegisterSuccess} />
+						<Route path="/login">
+							<Login />
+						</Route>
 						<Route path="/" component={Home} />
 					</Switch>
 				</Router>
