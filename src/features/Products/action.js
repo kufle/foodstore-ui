@@ -1,6 +1,6 @@
 import debounce from "debounce-promise";
 import { getProducts } from "../../api/product"
-import { ERROR_FETCHING_PRODUCT, NEXT_PAGE, PREV_PAGE, SET_CATEGORY, SET_KEYWORD, SET_PAGE, SET_TAGS, START_FETCHING_PRODUCT, SUCCESS_FETCHING_PRODUCT } from "./constant"
+import { ERROR_FETCHING_PRODUCT, NEXT_PAGE, PREV_PAGE, SET_CATEGORY, SET_KEYWORD, SET_PAGE, SET_TAGS, START_FETCHING_PRODUCT, SUCCESS_FETCHING_PRODUCT, TOGGLE_TAG } from "./constant"
 
 let debouncedFetchProducts = debounce(getProducts, 1000);
 export const fetchProducts = () => {
@@ -80,6 +80,14 @@ export const setTags = tags => {
 export const clearTags = () => {
     return setTags([]);
 }
+
+export const toggleTag = tag => {
+    return {
+      type: TOGGLE_TAG, 
+      tag
+    };
+ }
+ 
 
 export const goToNextPage = () => {
     return {
