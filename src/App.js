@@ -8,11 +8,14 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import RegisterSuccess from './pages/Register/RegisterSuccess';
 import Login from './pages/Login';
+import {getCart} from './api/cart';
+import UserAddressAdd from './pages/UserAddressAdd';
 
 function App() {
 	
 	useEffect(() => {
 		listen();
+		getCart();
 	},[]);
 	
 	return (
@@ -24,6 +27,9 @@ function App() {
 						<Route path="/register-success" component={RegisterSuccess} />
 						<Route path="/login">
 							<Login />
+						</Route>
+						<Route path="/alamat-pengiriman/tambah">
+							<UserAddressAdd/>
 						</Route>
 						<Route path="/" component={Home} />
 					</Switch>

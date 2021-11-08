@@ -2,15 +2,20 @@ import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { SideNav, LayoutSidebar, Responsive, CardProduct, Pagination, InputText, Pill } from 'upkit';
 import BounceLoader from 'react-spinners/BounceLoader';
+import { useHistory } from "react-router-dom";
 import menus from "./menus";
 import Topbar from "../../components/Topbar";
 import {config} from '../../config';
 import { fetchProducts, goToNextPage, goToPrevPage, setPage, setKeyword, setCategory, toggleTag } from '../../features/Products/action';
 import {tags} from './tags';
+import Cart from "../../components/Cart";
+import { addItem, removeItem } from '../../features/Cart/actions';
 
 function Home(){
     const dispatch = useDispatch();
     let products = useSelector(state => state.products);
+    let cart = useSelector(state => state.cart);
+    let history = useHistory();
     console.log(products);
     useEffect(() => {
         dispatch(fetchProducts());
@@ -63,7 +68,7 @@ function Home(){
                                             imgUrl=
                                             {`${config.api_host}/upload/${product.image_url}`}
                                             price={product.price}
-                                            onAddToCart={_ => null}
+                                            onAddToCart={() => dispatch(addItem(product))}
                                             />
                                         </div>
                                     })}
@@ -80,7 +85,12 @@ function Home(){
                                 </div>
                             </div>
                             <div className="w-full md:w-1/4 h-full shadow-lg border-r border-white bg-gray-100">
-                                Keranjang belanja di sini
+                                <Cart 
+                                    items={cart}
+                                    onItemInc={item => dispatch(addItem(item))}
+                                    onItemDec={item => dispatch(removeItem(item))}
+                                    onCheckout={_ => history.push("/checkout")}
+                                />
                             </div>
                         </div>}
                 sidebarSize={80} />
